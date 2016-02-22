@@ -1,0 +1,41 @@
+library(foreign)
+x<-read.dbf("C:\\Users\\SALA-C24\\Desktop\\SDEMT215.dbf")
+install.packages("questionr")
+require(questionr)
+
+
+
+require(foreign)
+x<-data.frame(x)
+str(x)
+attach(x)
+help(str)
+table(SEX)
+table(EDA)
+EDA1<-as.numeric(EDA)
+table(EDA1)
+c0<-table(x$SEX)
+c0
+c1<-wtd.table(x$SEX,weights=x$FAC)
+table(c1)
+write.csv(c1,file = "C:\\Users\\SALA-C24\\Desktop\\PEA.csv")
+tabrama<-wtd.table(x$SEX,weights=x$FAC)
+c1.1<-round((tabrama/margin.table(tabrama))*100,2)
+write.csv(c1,file = "C:\\Users\\SALA-C24\\Desktop\\PEA1.csv")
+c1.1
+x$SEX<-ordered(x$SEX,levels =c(1,2),labels=c("Hombres","Mujeres"))
+c2<-wtd.table(x$SEX,weights=x$FAC)
+write.csv(c1,file = "C:\\Users\\SALA-C24\\Desktop\\Ocupados.csv")
+c2
+View(x)
+#EJERCICIO CLASE ETIQUETAR LA VARIABLE NAC_MES
+x$SEX
+NAC_MES1<-as.numeric(NAC_MES)
+NAC_MES<-ordered(NAC_MES1,levels=c(1,2,3,4,5,6,7,8,9,10,11,12,99),labels=c("Ene","feb","Mar","Abr","May","Jun","Jul","AGO","SEP","OCT","NOV","DIC","NE"))
+x$NAC_MES
+View(x)
+c2<-wtd.table(x$NAC_MES,weights=x$FAC)
+View(c2)
+x$NAC_MES
+NAC_MES
+table(NAC_MES)
